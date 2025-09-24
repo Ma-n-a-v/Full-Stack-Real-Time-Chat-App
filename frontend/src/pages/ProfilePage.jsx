@@ -1,9 +1,8 @@
+import React from "react";
 import { useState } from "react";
 import { useAuthStore } from "../store/useAuthStore";
 import { Camera, Mail, User } from "lucide-react";
-import toast from "react-hot-toast";
-
-const ALLOWED_TYPES = ["image/jpeg", "image/jpg", "image/png"];
+import { toast } from 'react-hot-toast';
 
 const ProfilePage = () => {
   const { authUser, isUpdatingProfile, updateProfile } = useAuthStore();
@@ -12,13 +11,11 @@ const ProfilePage = () => {
   const handleImageUpload = async (e) => {
     const file = e.target.files[0];
     if (!file) return;
-
-    if (!ALLOWED_TYPES.includes(file.type)) {
-      toast.error("Only JPG, JPEG, or PNG images are allowed!"); // use toast if you prefer
-      e.target.value = "";          // reset file input so user can pick again
+    const validTypes = ['image/jpg', 'image/jpeg', 'image/png', 'image/svg'];
+    if (!validTypes.includes(file.type)) {
+      toast.error("Invalid file type.");
       return;
     }
-
     const reader = new FileReader();
 
     reader.readAsDataURL(file);

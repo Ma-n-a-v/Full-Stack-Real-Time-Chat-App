@@ -22,7 +22,7 @@ app.use(
 );
 app.use("/api/auth", authRoutes)
 //end point for messages
-app.use("/api/message", messageRoute)
+app.use("/api/messages", messageRoute)
 
 app.listen(port, ()=> {
     console.log(`Server is running in localhost:${port}`);
